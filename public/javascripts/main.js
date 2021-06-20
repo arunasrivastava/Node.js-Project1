@@ -1,9 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
+let animalArray = [];
 
-    $.(document).on("pagebeforeshow", #ListAll", function (event) {
-        FillAnimalArrayFromServer();
-        FillSystemArrayFromServer()
-    });
+document.addEventListener("DOMContentLoaded", function (event) {
     document.getElementById("addAnimal").addEventListener("click", addToArray);
     function addToArray(){
         var animal = new animalObj (document.getElementById("name").value,document.getElementById("color").value,document.getElementById("select-group").value, document.getElementById("select-fluffiness").value);
