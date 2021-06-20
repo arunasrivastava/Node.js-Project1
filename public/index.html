@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Animal List</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Nova Flat" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <script src="/javascripts/main.js"></script>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/index.css">
+
+</head>
+
+<body>
+
+  <!-- Start of  page ------------------------------------------------------------------>
+  <div data-role="page" id="home">
+
+    <!--   page header -->
+    <div data-role="header" data-theme="a">
+      <h1 >My Animals</h1>
+      <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/11055/cute-animal-clipart-xl.png" id="elephant"> 
+      <div data-role="navbar" data-theme="b">
+        <ul>
+          <li><a href="#home" >Home Page</a> </li>
+          <li><a href="#Load">Add Animal</a></li>
+          <li><a href="#ListAll">List Animals</a></li>
+          <li><a href="#page4"> List by Group </a></li>
+          <li><a href= "#stats"> Additional Statistics</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!--   page content -->
+    <div data-role="content" data-theme="a">
+      <div class="newFont">
+        <h1> Your List of Animals</h1>
+        <img src="https://cdn.glitch.com/517b9ecb-fa00-41a8-902c-f21740808bac%2Fanimal_dance_700.png?v=1620580346564" class="center">
+        <p>
+          welcome to your site for organizing your favorite animals! <br> click "add an animal" to get started!
+        </p>
+      </div>
+    </div>
+
+    <!--  page footer -->
+    <div data-role="footer" data-theme="a">
+        <h1>By: Aruna Srivastava & Madison Shimkus</h1>
+        <img src="https://i.pinimg.com/originals/f6/54/dd/f654ddc7d844b78e70003ecb393ed589.png" id="heart">
+    </div>
+  </div>
+  <!-- End of  page ------------------------------------------------------------------>
+
+
+
+  <div data-role="page" id="Load">
+    <!--  page header -->
+    <div data-role="header" data-theme="a">
+         <h1>Add an Animal </h1>
+         <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/11055/cute-animal-clipart-xl.png" id="elephant"> 
+      <div data-role="navbar" data-theme="a">
+        <ul>
+          <li><a href="#home">Home Page</a></li>
+          <li><a href="#Load">Add Animal</a></li>
+          <li><a href="#ListAll">List Animals</a></li>
+          <li><a href="#page4"> List by Group </a></li>
+          <li><a href= "#stats"> Additional Statistics</a></li>
+        </ul>
+      </div><!-- /navbar -->
+
+    </div>
+
+    <!-- page content -->
+  
+    <div data-role="content" data-theme="a">
+      <h2>Enter an Animal</h2>
+      Enter Animal name <br/>
+      <input type="text" value="" id="name"/>
+      Enter Animal Color <br/>
+      <input type="text" value="" id="color"/>
+        <div class="ui-field-contain">
+          <label for="select-group">Select a Animal Group </label>
+          <select name="select-group" id="select-group">
+            <option disabled selected value>-- select a animal group --</option>
+            <option value="Reptile">Reptile</option>
+            <option value="Mammal">Mammal</option>
+            <option value="Bird">Bird</option>
+            <option value="Fish">Fish</option>
+            <option value="Amphibian">Amphibian</option>
+            <option value="Insect">Insect</option>
+          </select>
+        </div>
+        <div class="ui-field-contain">
+            <label for="select-fluffiness">Rate Fluffiness</label>
+            <select name="select-fluffiness" id="select-fluffiness">
+                <option disabled selected value>-- select a rating --</option>
+                <option value="1">★</option>
+                <option value="2">★★</option>
+                <option value="3">★★★</option>
+                <option value="4">★★★★</option>
+                <option value="5">★★★★★</option>
+            </select>
+          </div>
+    
+    
+      <input type="button" value="Click To Add Animal" id="addAnimal" data-inline="true" />
+    </div>
+    
+    <!--   page footer -->
+    <div data-role="footer" data-theme="a">
+        <h1>By: Aruna Srivastava & Madison Shimkus</h1>
+        <img src="https://i.pinimg.com/originals/f6/54/dd/f654ddc7d844b78e70003ecb393ed589.png" id="heart">
+    </div>
+  </div>
+  <!-- End of  page ------------------------------------------------------------------>
+
+
+
+  <div data-role="page" id="ListAll">
+    <!--   page header -->
+    <div data-role="header" data-theme="a">
+      <h1>My Animal List</h1>
+      <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/11055/cute-animal-clipart-xl.png" id="elephant"> 
+      <div data-role="navbar" data-theme="a">
+        <ul>
+          <li><a href="#home">Home Page</a></li>
+          <li><a href="#Load">Add Animal</a></li>
+          <li><a href="#ListAll">List Animals</a></li>
+          <li><a href="#page4"> List by Group </a></li>
+          <li><a href= "#stats"> Additional Statistics</a></li>
+        </ul>
+      </div><!-- /navbar -->
+
+    </div>
+    <!--   page content -->
+    <div data-role="content" data-theme="e">
+      <p> Here are my Animals</p>
+      <fieldset id="list">
+        <div id="listed">
+            <ul id ="myul">
+            </ul>
+        </div>
+      </fieldset>
+      <div id="divAnimalList"></div>
+      <input type="button" value="Sort By Name 🅰️" id="buttonSortName" data-inline="true" />
+    </div>
+
+
+    <!--   page footer -->
+    <div data-role="footer" data-theme="a">
+      <h1>By: Aruna Srivastava & Madison Shimkus</h1>
+      <img src="https://i.pinimg.com/originals/f6/54/dd/f654ddc7d844b78e70003ecb393ed589.png" id="heart">
+    </div>
+  </div>
+  <!-- End of  page ------------------------------------------------------------------>
+
+  <!-- Start of  page -->
+  <div data-role="page" id="details">
+  
+    <!--   page header -->
+    <div data-role="header" data-theme='a'>
+      <h1>My Movies</h1>
+      <div data-role="navbar" data-theme='b'>
+        <ul>
+            <li><a href="#home">Home Page</a></li>
+            <li><a href="#Load">Add Animal</a></li>
+            <li><a href="#ListAll">List Animals</a></li>  
+            <li><a href="#page4"> List by Group </a></li>
+            <li><a href= "#stats"> Additional Statistics</a></li>
+        </ul>
+      </div><!-- /navbar -->
+    </div>
+  
+    <!--  content -->
+    <div data-role="content" data-theme='c'>
+      <p> Here are the details</p>
+      <p id="oneName"></p>
+      <p id="oneColor"></p>
+      <p id="oneGroup"></p>
+      <p id="oneFluffiness"></p>
+
+      <input type="button" value="Delete" id="delete" style="background: rgb(216, 11, 11)"/>
+    </div>
+  
+    <!--    footer -->
+    <div data-role="footer" data-theme='b'>
+      <h1>By: Aruna Srivastava & Madison Shimkus</h1>
+    </div>
+  
+  </div>
+
+  <!-- End of  page ------------------------------------------------------------------>
+  
+      <div data-role="page" id="page4">
+  <div data-role="header" data-theme="a">
+      <h1 >My Animals</h1>
+      <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/11055/cute-animal-clipart-xl.png" id="elephant"> 
+      <div data-role="navbar" data-theme="b">
+        <ul>
+          <li><a href="#home" >Home Page</a> </li>
+          <li><a href="#Load">Add Animal</a></li>
+          <li><a href="#ListAll">List Animals</a></li>
+          <li><a href="#page4" class = 'active-page'> List by Group </a></li>
+          <li><a href= "#stats"> Additional Statistics</a></li>
+        </ul>
+      </div>
+    </div>
+      
+       <!--   page content -->
+    <div data-role="content" data-theme="e">
+        <p>
+            Click on one of the buttons below to show a specific group!
+        </p>
+       <div id="divAnimalListSubset"></div>
+      <input type="button" value="Show Reptiles" id="buttonSubsetReptiles" data-inline="true" />
+      <input type="button" value="Show Mammals" id="buttonSubsetMammals" data-inline="true" />
+      <input type="button" value="Show Birds" id="buttonSubsetBirds" data-inline="true" />
+      <input type="button" value="Show Fish" id="buttonSubsetFish" data-inline="true" />
+      <input type="button" value="Show Amphibians" id="buttonSubsetAmphibians" data-inline="true" />
+      <input type="button" value="Show Insects" id="buttonSubsetInsects" data-inline="true" />
+    </div>
+    <!--   page footer -->
+    <div data-role="footer" data-theme="a">
+      <h1>By: Aruna Srivastava & Madison Shimkus</h1>
+      <img src="https://i.pinimg.com/originals/f6/54/dd/f654ddc7d844b78e70003ecb393ed589.png" id="heart">
+    </div>
+  </div>
+  <!-- End of  page -->
+  </div>
+
+
+
+
+  <div data-role="page" id="stats">
+    <div data-role="header" data-theme="a">
+        <h1 >My Statistics</h1>
+        <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/11055/cute-animal-clipart-xl.png" id="elephant"> 
+        <div data-role="navbar" data-theme="b">
+          <ul>
+            <li><a href="#home" >Home Page</a> </li>
+            <li><a href="#Load">Add Animal</a></li>
+            <li><a href="#ListAll">List Animals</a></li>
+            <li><a href="#page4"> List by Group </a></li>
+            <li><a href= "#stats"> Additional Statistics</a></li>
+          </ul>
+        </div>
+    </div>
+           <!--  content -->
+           <div data-role="content" data-theme="e">
+            <p>
+                Click on one of the buttons below to show your statistics!
+            </p>
+           <div id="calculateStats"></div>
+          <input type="button" value="Show Stats" id="buttonStats" data-inline="true" />
+        </div>
+
+      <!--   page footer -->
+      <div data-role="footer" data-theme="a">
+        <h1>By: Aruna Srivastava & Madison Shimkus</h1>
+        <img src="https://i.pinimg.com/originals/f6/54/dd/f654ddc7d844b78e70003ecb393ed589.png" id="heart">
+      </div>
+    </div>
+    <!-- End of  page -->
+    </div>
+
+
+
+  <p id="IDparmHere" hidden>change1</p>  <!--hidden, a place to stash the user ID -->
+</body>
+
+</html>

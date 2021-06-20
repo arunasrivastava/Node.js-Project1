@@ -1,0 +1,38 @@
+img {
+    height: 300px;
+   display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+  }
+  
+  h1 {
+    font-family: 'Itim', cursive;
+    text-align: center;
+    color: #6db5ed;
+  }
+  
+  p {
+  font-family: 'Itim', cursive;
+    text-align: center;
+    color:#f29822;
+   
+  }
+  
+  a {
+    
+    font-family: 'Itim', cursive;
+    color: red;
+    
+  }
+  #elephant{
+      width: 150px;
+      height: 80px;
+      float: center;
+  }
+  #heart{
+    width: 100px;
+    height:100px;
+    float: center
+  }
+  
