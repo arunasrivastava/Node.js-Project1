@@ -1,6 +1,6 @@
 let animalArray = [];
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("addAnimal").addEventListener("click", addToArray);
     function addToArray(){
         var animal = new animalObj (document.getElementById("name").value,document.getElementById("color").value,document.getElementById("select-group").value, document.getElementById("select-fluffiness").value);
@@ -10,6 +10,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.getElementById("color").value = ""; 
         document.getElementById("select-group").value = "";
         document.getElementById("select-fluffiness").value = ""; 
+
+        //-----
+
+        /* Add one new note */
+        $.ajax({
+            url : "/AddAnimal",
+            type: "POST",
+            data: JSON.stringify(animal),
+            contentType: "application/json; charset utf-8",
+            dataType : "json",
+            success: function (result){
+                console.log("back from server");
+               document.location.href = "index.html#ListAll";
+            }
+        });
+
         }
         else {
             alert("please enter valid fields" ); 
@@ -62,8 +78,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
      });
 
      document.getElementById("delete").addEventListener("click", function () {
-        deleteAnimal(document.getElementById("IDparmHere").innerHTML);
-        printAnimalList();  // recreate li list after removing one
+      //  deleteAnimal(document.getElementById("IDparmHere").innerHTML);
+     //   printAnimalList();  // recreate li list after removing one
+     let which = localStorage.getItem("title");
+     $.ajax({
+         type: "DELETE",
+         url: "/DeleteAnimal/" + which,
+         success: function(result) {
+             console.log(result);
+             document.location.href = "index.html#ListAll";
+             },
+             error: function (xhr, textStatus, errorThrown){
+                 console.log('error in operation');
+                 alert("server could not delete note with title " + "which")
+             }
+         });
+     });
+
         document.location.href = "index.html#ListAll";  // go back to movie list 
     });
 
@@ -101,14 +132,15 @@ function animalObj(name, color,group, fluffiness) {
         divAnimalList.removeChild(divAnimalList.firstChild);
     };
 
-    function UpdateDisplay () {
-        $.get("/getAllNotes", function(data, status) { //AJAX get
-      animalArray = data; // put the returned server json data into our local array
-        });
-      }
 
     var ul = document.createElement('ul');
 
+
+    function UpdateDisplay () {
+        $.get("/getAllAnimals", function(data, status) { //AJAX get
+      animalArray = data; // put the returned server json data into our local array
+        });
+      
     animalArray.forEach(function (element,) {   
         var li = document.createElement('li');
         li.classList.add('oneAnimal'); 
@@ -116,6 +148,7 @@ function animalObj(name, color,group, fluffiness) {
         li.innerHTML = element.getAll();
         ul.appendChild(li);
     });
+
     divAnimalList.appendChild(ul)
  
     var liArray = document.getElementsByClassName("oneAnimal");
@@ -126,16 +159,10 @@ function animalObj(name, color,group, fluffiness) {
         document.location.href = "index.html#details";
         });
     });
-};    
-});
+};  
+ }  
 
- 
-/**
- *  https://ourcodeworld.com/articles/read/764/how-to-sort-alphabetically-an-array-of-objects-by-key-in-javascript
-* Function to sort alphabetically an array of objects by some specific key.
-* 
-* @param {String} property Key of the object to sort.
-*/
+
 function dynamicSort(property) {
     var sortOrder = 1;
 
@@ -197,22 +224,6 @@ function printAnimalListSubset(whichType) {
 
 
 };
-
-res.render('index', { title: 'Express' });
-
-var router = express.Router();
-
-router.get('/', function (req,res, next) {
-    res.sendFile('index.html');
-});
-
-
-  /* get ALL movies data */
-  router.get('/getAllAnimals', function(req,res) {
-    res.status(200).json(serverNotes);
-  });
-
-  module.exports = router;
 
 //------------------------delete button-------------//
 
