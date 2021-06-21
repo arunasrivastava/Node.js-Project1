@@ -24,7 +24,7 @@ router.get('/getAllAnimals',function(req,res) {
 });
 
 /* Add one new note */
-router.post('/AddAnimal', function(req, res){
+router.post('/AddAnimals', function(req, res){
  // const newAnimal = req.body;
   animalArrayS.push(req.body);
   res.status(200).json("success");

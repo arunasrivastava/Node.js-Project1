@@ -11,11 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("select-group").value = "";
         document.getElementById("select-fluffiness").value = ""; 
 
-        //-----
-
-        /* Add one new note */
         $.ajax({
-            url : "/AddAnimal",
+            url : "/AddAnimals",
             type: "POST",
             data: JSON.stringify(animal),
             contentType: "application/json; charset utf-8",
