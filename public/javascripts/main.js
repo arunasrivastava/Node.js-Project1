@@ -129,41 +129,46 @@ let animalObj = function animalObj(name, color,group, fluffiness) {
     //User can click active li and access the details of animal on both pages 
    
  //This function will print the data on the 'list animals' tab by traversing the array of objects and printing them as a string 
- function printAnimalList() {
+//This function will print the data on the 'list animals' tab by traversing the array of objects and printing them as a string
+function printAnimalList() {
     var divAnimalList = document.getElementById("divAnimalList");
-    while (divAnimalList.firstChild) {    
-        divAnimalList.removeChild(divAnimalList.firstChild);
+    while (divAnimalList.firstChild) {
+    divAnimalList.removeChild(divAnimalList.firstChild);
     };
-
-
+    
+    
     var ul = document.createElement('ul');
-
-
-    function UpdateDisplay () {
-        $.get("/getAllAnimals", function(data, status) { //AJAX get
-      animalArray = data; // put the returned server json data into our local array
-        });
-      
-    animalArray.forEach(function (element,) {   
-        var li = document.createElement('li');
-        li.classList.add('oneAnimal'); 
-        li.setAttribute("data-parm", element.name);
-        li.innerHTML = element.getAll();
-        ul.appendChild(li);
+    
+    
+    //function UpdateDisplay () { <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< you had this line which just doesn't go here
+    // you don't want to define that, you want to do it.
+    $.get("/getAllAnimals", function(data, status) { //AJAX get
+    animalArray = data; // put the returned server json data into our local array
+    console.log(data);
+    
+    
+    animalArray.forEach(function (element,) {
+    var li = document.createElement('li');
+    li.classList.add('oneAnimal');
+    li.setAttribute("data-parm", element.name, element.color);
+    li.innerHTML = element.name;
+    // I am guessing you had a function to add all the element names here. But I don't think that code is anywhere
+    // by changing it to li.innerHTML = element.name; I could see that it was getting the data from the server, you just have to fix the formatting.
+    ul.appendChild(li);
     });
-
+    
     divAnimalList.appendChild(ul)
- 
+    
     var liArray = document.getElementsByClassName("oneAnimal");
     Array.from(liArray).forEach(function (element) {
-        element.addEventListener('click', function () {
-        var parm = this.getAttribute("data-parm"); 
-        document.getElementById("IDparmHere").innerHTML = parm;
-        document.location.href = "index.html#details";
-        });
+    element.addEventListener('click', function () {
+    var parm = this.getAttribute("data-parm");
+    document.getElementById("IDparmHere").innerHTML = parm;
+    document.location.href = "index.html#details";
     });
-};  
- }  
+    });
+    });
+    };
 
 
 function dynamicSort(property) {
