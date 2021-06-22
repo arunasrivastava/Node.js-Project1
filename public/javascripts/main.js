@@ -1,7 +1,30 @@
 let animalArray = [];
 
+
 document.addEventListener("DOMContentLoaded", function () {
+
+//This animal object takes in given characteristics from user, verifies it, and creates a string 
+let animalObj = function animalObj(name, color,group, fluffiness) {
+    this.name = name;
+    this.color = color;
+    this.group = group; 
+    this.fluffiness = fluffiness;
+    this.isValid = function () {
+      if ((this.name != "") && (this.color != "") && (this.group != null) && (this.fluffiness >=1)){
+        return true
+      }
+      else{ 
+        return false;
+      }
+    };
+    
+    this.getAll = function() {
+      return name + " " + color + " " + group + " fluffiness: " + fluffiness;
+    };
+}
+
     document.getElementById("addAnimal").addEventListener("click", addToArray);
+
     function addToArray(){
         var animal = new animalObj (document.getElementById("name").value,document.getElementById("color").value,document.getElementById("select-group").value, document.getElementById("select-fluffiness").value);
         if (animal.isValid()){
@@ -14,8 +37,8 @@ document.addEventListener("DOMContentLoaded", function () {
         $.ajax({
             url : "/AddAnimals",
             type: "POST",
-            data: JSON.stringify(animal),
-            contentType: "application/json; charset utf-8",
+            data: JSON.stringify(animalObj),
+            contentType: "application/json; charset=utf-8",
             dataType : "json",
             success: function (result){
                 console.log("back from server");
@@ -76,8 +99,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
      document.getElementById("delete").addEventListener("click", function () {
       //  deleteAnimal(document.getElementById("IDparmHere").innerHTML);
-     //   printAnimalList();  // recreate li list after removing one
-     let which = localStorage.getItem("title");
+        printAnimalList();  // recreate li list after removing one
+
+     let which = localStorage.getItem('name');
+
      $.ajax({
          type: "DELETE",
          url: "/DeleteAnimal/" + which,
@@ -87,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
              },
              error: function (xhr, textStatus, errorThrown){
                  console.log('error in operation');
-                 alert("server could not delete note with title " + "which")
+                 alert("server could not delete note with name " + which)
              }
          });
      });
@@ -103,25 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     //User can click active li and access the details of animal on both pages 
    
-//This animal object takes in given characteristics from user, verifies it, and creates a string 
-function animalObj(name, color,group, fluffiness) {
-    this.name = name;
-    this.color = color;
-    this.group = group; 
-    this.fluffiness = fluffiness;
-    this.isValid = function () {
-      if ((this.name != "") && (this.color != "") && (this.group != null) && (this.fluffiness >=1)){
-        return true
-      }
-      else{ 
-        return false;
-      }
-    };
-    
-    this.getAll = function() {
-      return name + " " + color + " " + group + " fluffiness: " + fluffiness;
-    };
-}
  //This function will print the data on the 'list animals' tab by traversing the array of objects and printing them as a string 
  function printAnimalList() {
     var divAnimalList = document.getElementById("divAnimalList");

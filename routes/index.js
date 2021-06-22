@@ -15,7 +15,7 @@ animalArrayS.push(new animalObj("Capybara", "brown", "mammal", "2"));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.sendFile("index.html");
+  res.sendFile('index.html');
 });
 
 /* GET all animals data */
@@ -23,21 +23,21 @@ router.get('/getAllAnimals',function(req,res) {
   res.status(200).json(animalArrayS);
 });
 
-/* Add one new note */
+/* Add one new animal */
 router.post('/AddAnimals', function(req, res){
- // const newAnimal = req.body;
+ const animalObj = req.body;
   animalArrayS.push(req.body);
   res.status(200).json("success");
 });
 
-router.delete('DeleteAnimal/:title', (req,res)  => {
-  const title = req.params.title;
+router.delete('/DeleteAnimal/:name', (req,res)  => {
+  const name = req.params.id;
   let found = false;
-  console.log(title);
+  console.log(name);
 
   for(var i = 0; i < animalArrayS.length; i++) // find the match
 {
-  if(animalArrayS[i].title === title) {
+  if(animalArrayS[i].name === name) {
     animalArrayS.splice(i, 1); // remove objext from array
     found = true;
     break;
@@ -49,7 +49,7 @@ if(!found) {
     status: "error"
   });
 } else {
-    res.status(200).json(title + 'deleted!');
+    res.status(200).json(name + 'deleted!');
   }
   });
 
