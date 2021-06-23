@@ -11,7 +11,7 @@ let animalObj = function(name, color,group, fluffiness) {
   this.fluffiness = fluffiness;
 };
 
-animalArrayS.push(new animalObj("Capybara", "brown", "mammal", "2"));
+//animalArrayS.push(new animalObj("Capybara", "brown", "mammal", "2"));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -25,13 +25,13 @@ router.get('/getAllAnimals',function(req,res) {
 
 /* Add one new animal */
 router.post('/AddAnimals', function(req, res){
- const animalObj = req.body;
-  animalArrayS.push(req.body);
+  const animal = req.body;
+  animalArrayS.push(animal);
   res.status(200).json("success");
 });
 
 router.delete('/DeleteAnimal/:name', (req,res)  => {
-  const name = req.params.id;
+  const name = req.params.name;
   let found = false;
   console.log(name);
 

@@ -1,8 +1,5 @@
 let animalArray = [];
 
-
-document.addEventListener("DOMContentLoaded", function () {
-
 //This animal object takes in given characteristics from user, verifies it, and creates a string 
 let animalObj = function animalObj(name, color,group, fluffiness) {
     this.name = name;
@@ -22,6 +19,8 @@ let animalObj = function animalObj(name, color,group, fluffiness) {
       return name + " " + color + " " + group + " fluffiness: " + fluffiness;
     };
 }
+document.addEventListener("DOMContentLoaded", function () {
+
 
     document.getElementById("addAnimal").addEventListener("click", addToArray);
 
@@ -37,7 +36,7 @@ let animalObj = function animalObj(name, color,group, fluffiness) {
         $.ajax({
             url : "/AddAnimals",
             type: "POST",
-            data: JSON.stringify(animalObj),
+            data: JSON.stringify(animal),
             contentType: "application/json; charset=utf-8",
             dataType : "json",
             success: function (result){
@@ -49,15 +48,7 @@ let animalObj = function animalObj(name, color,group, fluffiness) {
         }
         else {
             alert("please enter valid fields" ); 
-        }
-        $(document).on("pagebeforeshow", "#details", function (event) {   
-            let localID = document.getElementById("IDparmHere").innerHTML;
-            let arrayPointer = GetArrayPointer(localID);
-            document.getElementById("oneName").innerHTML = "The Animal: " + animalArray[arrayPointer].name;
-            document.getElementById("oneColor").innerHTML = "Animal Color: " + animalArray[arrayPointer].color;
-            document.getElementById("oneGroup").innerHTML = "Animal Group: " + animalArray[arrayPointer].group;
-            document.getElementById("oneFluffiness").innerHTML = "Fluffiness Rating: " + animalArray[arrayPointer].fluffiness;
-        });   
+        }   
     }
     $(document).bind("change", "#select-group", function (event, ui) {
         selectedGroup = $('#select-group').val();
@@ -95,13 +86,12 @@ let animalObj = function animalObj(name, color,group, fluffiness) {
     });
     document.getElementById("buttonStats").addEventListener("click", function () {
         document.getElementById("calculateStats").innerHTML = calculateStats();
-     });
-
+    });       
      document.getElementById("delete").addEventListener("click", function () {
       //  deleteAnimal(document.getElementById("IDparmHere").innerHTML);
         printAnimalList();  // recreate li list after removing one
 
-     let which = localStorage.getItem('name');
+     let which = document.getElementById("IDparmHere").innerHTML;
 
      $.ajax({
          type: "DELETE",
@@ -114,11 +104,12 @@ let animalObj = function animalObj(name, color,group, fluffiness) {
                  console.log('error in operation');
                  alert("server could not delete note with name " + which)
              }
-         });
+      });
+     
      });
 
-        document.location.href = "index.html#ListAll";  // go back to movie list 
-    });
+        document.location.href = "index.html#home";  // go back to movie list 
+    //});
 
     $(document).on("pagebeforeshow", "#page4", function (event) {   
         var divAnimalList = document.getElementById("divAnimalListSubset");
@@ -127,7 +118,15 @@ let animalObj = function animalObj(name, color,group, fluffiness) {
         };
     });
     //User can click active li and access the details of animal on both pages 
-   
+    $(document).on("pagebeforeshow", "#details", function (event) {   
+        let localID = document.getElementById("IDparmHere").innerHTML;
+        let arrayPointer = GetArrayPointer(localID);
+        document.getElementById("oneName").innerHTML = "The Animal: " + animalArray[arrayPointer].name;
+        document.getElementById("oneColor").innerHTML = "Animal Color: " + animalArray[arrayPointer].color;
+        document.getElementById("oneGroup").innerHTML = "Animal Group: " + animalArray[arrayPointer].group;
+        document.getElementById("oneFluffiness").innerHTML = "Fluffiness Rating: " + animalArray[arrayPointer].fluffiness;
+    });
+});
  //This function will print the data on the 'list animals' tab by traversing the array of objects and printing them as a string 
 //This function will print the data on the 'list animals' tab by traversing the array of objects and printing them as a string
 function printAnimalList() {
@@ -168,7 +167,7 @@ function printAnimalList() {
     });
     });
     });
-    };
+ };
 
 
 function dynamicSort(property) {
@@ -190,8 +189,8 @@ function dynamicSort(property) {
 //This will find the location in the array of a given name 
 function GetArrayPointer(localID) {
     for (let i = 0; i < animalArray.length; i++) {
-        if (localID === animalArray[i].name) {
-            return i;
+        if (localID == animalArray[i].name) {
+            return 0;
         }
     }
 }
