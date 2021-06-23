@@ -54,11 +54,11 @@ document.addEventListener("DOMContentLoaded", function () {
         selectedGroup = $('#select-group').val();
     });
     //button to sort alphabetically on 'list animals'
-    document.getElementById("buttonSortName").addEventListener("click", function() {
-        animalArray.sort(dynamicSort("name"));
-        printAnimalList();
-        document.location.href = "index.html#ListAll";
-    });
+    // document.getElementById("buttonSortName").addEventListener("click", function() {
+    //     animalArray.sort(dynamicSort("name"));
+    //     printAnimalList();
+    //     document.location.href = "index.html#ListAll";
+    // });
     //buttons to sort the list on 'list by group'
     document.getElementById("buttonSubsetReptiles").addEventListener("click", function () {
         printAnimalList();
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });       
      document.getElementById("delete").addEventListener("click", function () {
       //  deleteAnimal(document.getElementById("IDparmHere").innerHTML);
-        printAnimalList();  // recreate li list after removing one
+        //printAnimalList();  // recreate li list after removing one
 
      let which = document.getElementById("IDparmHere").innerHTML;
 
@@ -190,7 +190,7 @@ function dynamicSort(property) {
 function GetArrayPointer(localID) {
     for (let i = 0; i < animalArray.length; i++) {
         if (localID == animalArray[i].name) {
-            return 0;
+            return i;
         }
     }
 }
